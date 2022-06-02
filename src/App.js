@@ -14,6 +14,7 @@ import {
   CorporateMembership
 } from "./pages";
 import { MobileHeader } from './components/mobile-header';
+import MemberInfo from './pages/member-info';
 
 
 const App = () => {
@@ -29,11 +30,13 @@ const App = () => {
         <Container>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/committees" element={<Committees />} />
-            <Route path="/officers-and-the-court" element={<OfficersAndTheCourt />} />
-            <Route path="/corporate-membership" element={<CorporateMembership />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route exact path="/calendar" element={<Calendar />} />
+            <Route exact path="/committees" element={<Committees />} />
+            <Route exact path="/officers-and-the-court" element={<OfficersAndTheCourt />} />
+            <Route exact path="/corporate-membership" element={<CorporateMembership />} />
+            <Route exact path="/contact" element={<Contact />} />
+            <Route exact path="/member" element={<MemberInfo />} />
+
           </Routes>
         </Container>
       </Router>

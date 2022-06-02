@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from 'react-router-dom';
 import { Box } from 'reflexbox'
 import { withTheme } from '@emotion/react'
 import { Wrapper, ImageWrapper, Image, ContentWrapper, Title, Text, OverlayWrapper } from "./profile.styles";
@@ -7,7 +7,11 @@ import { Wrapper, ImageWrapper, Image, ContentWrapper, Title, Text, OverlayWrapp
 import arrow from "../../assets/svgs/arrow";
 import { IconButton } from "../icon-button";
 
-const Profile = ({width="100%", image, title, text, link, theme, dropdownOptions}) => {
+const Profile = ({width="100%", image, title, text, link, theme, dropdownOptions, moreInfo}) => {
+  const navigate = useNavigate();
+  const toPageMember=()=>{
+    navigate(link, {state:{text: moreInfo, image: image, title: title, role: text}});
+  }
 
   const jsx = <>
     {image && <ImageWrapper>
@@ -34,13 +38,13 @@ const Profile = ({width="100%", image, title, text, link, theme, dropdownOptions
         {title && <Title>{title}</Title>}
         {text && <Text>{text}</Text>}
       </Box>
-      {link && arrow}
+      {(link && moreInfo) && arrow}
     </ContentWrapper>}
   </>
 
   return (
     <Wrapper width="100%" maxWidth={width}>
-      {link ? <Link to={link}>{jsx}</Link> : jsx}
+      {(link && moreInfo) ? <div onClick={()=>{toPageMember()}}>{jsx}</div> : jsx}
     </Wrapper>
   )
 }

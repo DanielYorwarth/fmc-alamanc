@@ -33,6 +33,10 @@ const textStyling = (props) => css`
   font-weight: ${props.theme.fontWeights.body };
   line-height: ${props.theme.lineHeights.medium};
   font-size: ${props.theme.fontSizes[3]};
+  b {
+    color: ${props.theme.colors.primary};
+    font-weight: ${props.theme.fontWeights.bold};
+  }
 `
 
 export const LightText = styled.span(lightTextStyling);

@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Flex } from "reflexbox"
+import {  Flex } from "reflexbox"
 import { Image, Wrapper, Title, Text, Circle, ContentWrapper, OverflowWrapper, BackArrow } from "./event-info.styles"
 import { withTheme } from '@emotion/react'
 

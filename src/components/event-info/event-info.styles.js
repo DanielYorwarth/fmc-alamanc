@@ -14,6 +14,8 @@ const contentWrapperStyling = (props) => css`
   padding: ${props.theme.spacing[3]} ${props.theme.spacing[3]};
   @media screen and (max-width: 900px) {
     padding: ${props.theme.spacing[1]} ${props.theme.spacing[1]};
+    overflow-y: scroll;
+    height: 60vh;
   }
 `
 
@@ -64,6 +66,10 @@ const imageStyling = (props) => css`
 const overflowWrapperStyling = (props) => css `
   height: ${props.height};
   overflow-y: ${props.scroll};
+  @media screen and (max-width: 900px) {
+    overflow-y: initial;
+    height: 100%;
+  }
   padding-right: ${props.theme.spacing[0]};
   /* custom scrollbar */
   ::-webkit-scrollbar {

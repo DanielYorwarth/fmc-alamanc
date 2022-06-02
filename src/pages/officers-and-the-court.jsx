@@ -31,7 +31,7 @@ const OfficersAndTheCourt = () => {
       {(officersData && officersData.acf) &&
         <Slider
           label= {officersData.acf.carousel_title && officersData.acf.carousel_title}
-          slides={officersData.acf.carousel && officersData.acf.carousel.map(({acf: {name, phone_1, phone_2, email, roles, image}}) => 
+          slides={officersData.acf.carousel && officersData.acf.carousel.map(({acf: {name, phone_1, phone_2, email, roles, image, description}}) => 
             <Profile key={name}
               width="100%"
               title={name}
@@ -42,6 +42,8 @@ const OfficersAndTheCourt = () => {
                 phone_2,
                 email
               ]}
+              link="/member"
+              moreInfo={description ? description : null}
             />)}
         />}
         <H1Title>

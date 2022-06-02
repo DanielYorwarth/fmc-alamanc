@@ -6,8 +6,7 @@ const SidepanelRight = ({width="40rem", children, right="0", onOutsideClick}) =>
 
   const sidebarRef = useRef(null)
   useOutsideAlerter(sidebarRef, onOutsideClick)
-
-
+  
   return <Wrapper ref={sidebarRef} right={right} alignItems="center" flexWrap="wrap" width={width}>{children}</Wrapper>
 }
 

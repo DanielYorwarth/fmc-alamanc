@@ -21,6 +21,7 @@ const wrapperStyling = (props) => css`
   @media screen and (max-width:639px) {
     width: 85%;
     left: ${props.left};
+    overflow-y: scroll;
   }
 `
 const titleStyling = (props) => css`
