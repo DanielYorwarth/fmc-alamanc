@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { H1Title } from "../components/styles";
 import { ImageBox } from "../components/image-box";
 import getData from "../helpers/get-data";
 import { Flex } from "reflexbox";
 import { Loading } from "../components/loading";
+import { useEffectOnce } from "../hooks/use-effect-once";
 
 const CorporateMembership = () => {
 
   const [corporateMembers, setCorporateMembers] = useState(null)
 
   // Fetch areas
-  useEffect(() => {
+  useEffectOnce(() => {
     getData(null, 368, setCorporateMembers).catch(console.error)
   }, [])
 

@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "reflexbox";
 import { H1Title, PText, LightText } from "../components/styles";
 import getData from "../helpers/get-data";
 import { InfoCard } from "../components/info-card";
 import { Loading } from "../components/loading";
+import { useEffectOnce } from "../hooks/use-effect-once";
 
 const Contact = () => {
   
   const [contactDetails, setContactDetails] = useState(null)
 
   // Fetch areas
-  useEffect(() => {
+  useEffectOnce(() => {
     getData(null, 362, setContactDetails).catch(console.error)
   }, [])
 

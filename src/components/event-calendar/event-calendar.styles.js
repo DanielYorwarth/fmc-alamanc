@@ -42,6 +42,7 @@ const wrapperStyling = (props) => css`
   }
 
   button.react-calendar__tile {
+    flex: auto;
     background: none;
     border: none;
     height: 8rem;

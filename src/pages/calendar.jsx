@@ -10,6 +10,7 @@ import getData from "../helpers/get-data";
 import { InfoPopup } from "../components/info-popup";
 import formatDate from "../helpers/format-date";
 import { Loading } from "../components/loading";
+import { useEffectOnce } from "../hooks/use-effect-once";
 
 const Calendar = () => {
 
@@ -22,7 +23,7 @@ const Calendar = () => {
   const [indvidualEventActive, setIndvidualEventActive] = useState(false)
 
   // Fetch page data
-  useEffect(() => {
+  useEffectOnce(() => {
     getData(eventsEndpoint, null, setEvents).catch(console.error)
     getData(categoriesEndpoint, null, setEventsCategories).catch(console.error)
   }, [])
@@ -30,6 +31,8 @@ const Calendar = () => {
   // add class for colour to event object and remove irrelivant data from individual events objects
   useEffect(() => {
     if(!events || !eventsCategories || !eventColors) return
+    console.log(events)
+
     const formattedEvents = events.map((x) => {
       let indexColor = eventsCategories.findIndex((category) => category.name === x.acf.category[0].name);
       return {

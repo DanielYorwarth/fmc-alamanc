@@ -1,7 +1,7 @@
 import { withTheme } from '@emotion/react';
 import React from 'react'
 import Calendar from "react-calendar";
-import { Box, Flex } from 'reflexbox';
+import { Flex } from 'reflexbox';
 import { Wrapper, Hidden, Circle } from './event-calendar.styles';
 import { getThisDate } from './helpers';
 
@@ -12,7 +12,8 @@ const EventCalendar = ({theme, events, colors, onClick, categories}) => {
     return dateobj ? `${dateobj.colorName} ${dateobj.active ? 'active' : ''}` : "";
   };
 
-  const setEventIDs = (date) => {
+  const setEventIDs = (date, view) => {
+    console.log(view)
     const dateobj = events && getThisDate(events, date);
     return <Hidden className="event-id" id={dateobj && dateobj.id}/>;
   };
@@ -36,7 +37,7 @@ const EventCalendar = ({theme, events, colors, onClick, categories}) => {
         }
         onClickDay={(value, event) => onClick(event.target.nextSibling.id)}
         tileClassName={({ activeStartDate, date }) => setEvents(date)}
-        tileContent={({ activeStartDate, date }) => setEventIDs(date)}
+        tileContent={({ activeStartDate, date, view }) => setEventIDs(date,view)}
       />
       {categories && <Flex flexWrap="wrap" padding={["0", "0", "1rem 3rem"]}>
         {categories &&  categories.map((category) => <Flex width={["100%", "calc(50% - 1rem)",  "calc(50% - 1rem)", "calc(33.33% - 1rem)"]} marginBottom="1rem" marginRight="1rem" key={category.name}>

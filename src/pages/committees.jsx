@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Flex, Box } from "reflexbox";
 import Accordian from "../components/accordian/accordian.component";
 import { InfoCard } from "../components/info-card";
@@ -6,13 +6,14 @@ import { InfoPopup } from "../components/info-popup";
 import { Loading } from "../components/loading";
 import { H1Title } from "../components/styles";
 import getData from "../helpers/get-data";
+import { useEffectOnce } from "../hooks/use-effect-once";
 
 const Committees = () => {
 
   const [committees, setCommittees] = useState(null)
 
   // Fetch page data
-  useEffect(() => {
+  useEffectOnce(() => {
     getData(null, 359, setCommittees).catch(console.error)
   }, [])
 

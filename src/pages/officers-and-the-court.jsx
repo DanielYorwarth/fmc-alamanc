@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { Profile } from "../components/profile";
 import { H1Title } from "../components/styles";
 import profilePlaceholder from '../assets/images/person-icon.png';
@@ -8,6 +8,7 @@ import { Box, Flex } from "reflexbox";
 import { InfoCard } from "../components/info-card";
 import Accordian from "../components/accordian/accordian.component";
 import { Loading } from "../components/loading";
+import { useEffectOnce } from "../hooks/use-effect-once";
 
 
 const OfficersAndTheCourt = () => {
@@ -15,7 +16,7 @@ const OfficersAndTheCourt = () => {
   const [officersData, setOfficersData] = useState(null)
 
   // Fetch areas
-  useEffect(() => {
+  useEffectOnce(() => {
     getData(null, 364, setOfficersData).catch(console.error)
   }, [])
 

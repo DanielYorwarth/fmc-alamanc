@@ -7,6 +7,7 @@ import formatDate from "../helpers/format-date";
 import { EventTimelineHorizontal } from "../components/events-timeline-horizontal";
 import { Link } from "react-router-dom";
 import { Loading } from "../components/loading";
+import { useEffectOnce } from "../hooks/use-effect-once";
 
 const Dashboard = () => {
   
@@ -16,7 +17,7 @@ const Dashboard = () => {
   const [eventsCategories, setEventsCategories] = useState(null)
 
   // Fetch page data
-  useEffect(() => {
+  useEffectOnce(() => {
     getData(null, 366, setPageData).catch(console.error)
     getData(eventsEndpoint, null, setEvents).catch(console.error)
     getData(categoriesEndpoint, null, setEventsCategories).catch(console.error)
