@@ -12,7 +12,7 @@ const InfoCard = ({width, title, textList, phone1, phone2, email, primary}) => <
     {(phone1 && phone2) && <Text primary={primary}><Box margin="0 0.5rem">|</Box></Text>}
     {phone2 && <Text primary={primary}>{phone2}</Text>}
   </Flex>
-  {email && <Text primary={primary}>{email}</Text>}
+  {email && <a href={`mailto:${email}`}><Text primary={primary}>{email}</Text></a>}
 </Wrapper>
 
 export default InfoCard;

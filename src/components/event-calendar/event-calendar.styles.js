@@ -44,6 +44,7 @@ const wrapperStyling = (props) => css`
   button.react-calendar__tile {
     flex: auto !important;
     width: 14% !important;
+    position: relative;
     background: none;
     border: none;
     height: 8rem;
@@ -92,6 +93,66 @@ const wrapperStyling = (props) => css`
     opacity: 0.2;
   }
   ${mapColours(props)}
+  .gradient-color {
+    position: relative;
+    abbr {
+      cursor: pointer;
+      color: ${props.theme.colors.light};
+      font-weight: ${props.theme.fontWeights.semibold};
+      background: rgb(226,55,52);
+      background: linear-gradient(93deg, rgba(226,55,52,1) 0%, rgba(55,199,210,1) 100%) !important;
+    }
+    &:before {
+      transition: 0.3s;
+      border-radius: 50rem;
+      color: ${props.theme.colors.light};
+      font-weight: ${props.theme.fontWeights.semibold};
+      opacity: 0;
+      content: '';
+      width: 3.6rem;
+      height: 3.6rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @media screen and (max-width: 900px) {
+      &:before {
+      transition: 0.3s;
+      border-radius: 50rem;
+      color: ${props.theme.colors.light};
+      font-weight: ${props.theme.fontWeights.semibold};
+      opacity: 0;
+      content: '';
+      width: 2.4rem;
+      height: 2.4rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      }
+    }
+    &.active {
+      &:before {
+        transition: 0.3s;
+        border-radius: 50rem;
+        background: rgb(226,55,52);
+        background: linear-gradient(93deg, rgba(226,55,52,1) 0%, rgba(55,199,210,1) 100%) !important;
+        opacity: 0.3;
+        content: '';
+        width: 5rem;
+        height: 5rem;
+        @media screen and (max-width: 900px) {
+          width: 3.4rem;
+          height: 3.4rem;
+        }
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%)
+      }
+    }
+  }
 `
 
 const mapColours = (props) => {
@@ -166,10 +227,20 @@ const circleStyling = (props) => css`
   width: 1rem;
   border-radius: 50rem;
   background-color: ${props.colour};
-  margin-right: 1rem;
+  margin-right: 0.5rem;
   flex-shrink: 0;
+`
+
+const absoluteStyling = () => css`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  height: 100%;
 `
 
 export const Wrapper = styled(Box)(wrapperStyling);
 export const Hidden = styled.div(hiddenStyling);
+export const Absolute = styled.div(absoluteStyling);
 export const Circle = styled.div(circleStyling);

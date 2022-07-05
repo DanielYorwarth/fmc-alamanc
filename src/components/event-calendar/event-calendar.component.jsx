@@ -2,20 +2,43 @@ import { withTheme } from '@emotion/react';
 import React from 'react'
 import Calendar from "react-calendar";
 import { Flex } from 'reflexbox';
-import { Wrapper, Hidden, Circle } from './event-calendar.styles';
+import { Wrapper, Hidden, Circle, Absolute } from './event-calendar.styles';
 import { getThisDate } from './helpers';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const EventCalendar = ({theme, events, colors, onClick, categories}) => {
 
   const setEvents = (date) => {
     const dateobj = events && getThisDate(events, date)
-    return dateobj ? `${dateobj.colorName} ${dateobj.active ? 'active' : ''}` : "";
+    if (dateobj.length === 0) return
+    if (dateobj.length === 1 ) {
+      return dateobj[0] ? `${dateobj[0].colorName} ${dateobj[0].active ? 'active' : ''}` : "";
+    } else {
+      return  `gradient-color ${dateobj.find(date => date.active === true) ? 'active' : ''}`;
+    }
+
   };
 
   const setEventIDs = (date, view) => {
-    console.log(view)
-    const dateobj = events && getThisDate(events, date);
-    return <Hidden className="event-id" id={dateobj && dateobj.id}/>;
+    const thisDatesObj = events && getThisDate(events, date);
+    if (thisDatesObj.length === 0) return
+    if (thisDatesObj.length === 1 ) {
+      return <Hidden className="event-id" data-type="event-id" id={thisDatesObj[0] && thisDatesObj[0].id}/>;
+    } else {
+      return <div className="event-id-multiple-wrapper" data-type="event-id-multiple-wrapper">
+        <Popup
+          trigger={<Absolute className="button"></Absolute>}
+          position="right center"
+          closeOnDocumentClick
+        >
+          {thisDatesObj.map(date => <Flex style={{cursor: 'pointer'}} alignItems="start" margin="0.25rem 0" onClick={() => onClick(date.id)} key={date.id} id={date.id}>
+            <Circle colour={date.color} />
+            {date.name}
+          </Flex>)}
+        </Popup>
+      </div>;
+    }
   };
 
   return (

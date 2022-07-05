@@ -61,7 +61,7 @@ const Calendar = () => {
   }, [eventsCategories])
 
   const onDateClickHandler = (id) => {
-    if(!id || id === "") return
+    if(!id || id === '' ) return
     setIndvidualEvent(eventsFormatted.find(event => event.id == id))
     setEventsFormatted(eventsFormatted.map(event => {
       return {...event, active: event.id == id ? true : false}
@@ -94,7 +94,7 @@ const Calendar = () => {
             </Box>
           </Flex>
         </H1Title>}
-        {eventsFormatted && <EventCalendar categories={eventsCategories} onClick={(id) => onDateClickHandler(id)} events={eventsFormatted} colors={eventsCategories && eventsCategories.map((category) => category.acf.colour)} />}
+        {eventsFormatted && <EventCalendar categories={eventsCategories} onClick={(id, type) => onDateClickHandler(id, type)} events={eventsFormatted} colors={eventsCategories && eventsCategories.map((category) => category.acf.colour)} />}
       </Box>
       <SidepanelRight onOutsideClick={() => setIndvidualEventActive(null)} right={indvidualEventActive ? '0' : '-100%'} width={["80%", "70%", "60%", "25%"]}>
         {indvidualEvent ? 
@@ -114,7 +114,7 @@ const Calendar = () => {
         eventsFormatted && 
           <EventTimeline
             title="All Events"
-            events={eventsFormatted.map(event => {
+            events={eventsFormatted.filter(event => new Date(event.start) >= new Date()).map(event => {
               return {
                 title: event.name,
                 date: formatDate(event.start),

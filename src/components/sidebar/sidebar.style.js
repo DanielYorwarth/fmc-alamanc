@@ -13,7 +13,7 @@ const wrapperStyling = (props) => css`
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 50;
+  z-index: 10000;
   transition: 0.3s;
   @media screen and (max-width: 1350px) {
     width:9rem;

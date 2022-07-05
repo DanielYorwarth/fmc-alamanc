@@ -33,7 +33,7 @@ const Contact = () => {
         </Flex>
         {contacts && <Flex width="100%" flexWrap="wrap">
           {contacts.map(({acf: {name, phone_1, phone_2, email, roles}}, i) => <InfoCard key={name}
-            primary={i % 2 === 0}
+            primary={false}
             width={['100%', '100%', '100%', 'calc(50% - 2rem)']}
             title={name}
             phone1={phone_1}

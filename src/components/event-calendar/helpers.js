@@ -1,4 +1,4 @@
-const getThisDate = (dates, curDat) => dates.find((x) => {
+const getThisDate = (dates, curDat) => dates.filter((x) => {
   return (
     curDat.getDay() === new Date(x.start).getDay() &&
     curDat.getMonth() === new Date(x.start).getMonth() &&
