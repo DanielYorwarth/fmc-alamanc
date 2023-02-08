@@ -39,6 +39,10 @@ const textStyling = (props) => css`
   }
 `
 
+const imageStyling = (props) => css`
+  width: 100%;
+`
+export const Image = styled.img(imageStyling);
 export const LightText = styled.span(lightTextStyling);
 export const H1Title = styled.h1(titleStyling);
 export const LargeH1Title = styled.h1(largeTitleStyling);

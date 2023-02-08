@@ -26,6 +26,7 @@ const Contact = () => {
           {contactDetails.acf.description}
         </PText>
       </Box>}
+      <a target="_blank" rel="noreferrer" href="https://www.furnituremakers.org.uk"><PText>furnituremakers.org.uk</PText></a>
       {(contactDetails && contactDetails.acf) && contactDetails.acf.contact_office.map(({office, phone, contacts}, i) => <Box width="100%" marginBottom="5rem">
         <Flex alignItems="center" flexWrap="wrap" marginBottom="2rem">
           {office && <Box marginRight="3rem"><H1Title>{office}</H1Title></Box>}

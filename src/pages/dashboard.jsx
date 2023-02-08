@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Box, Flex } from "reflexbox";
-import { H1Title, LargeH1Title, PText } from "../components/styles";
+import { H1Title, LargeH1Title, PText, Image } from "../components/styles";
 import getData from "../helpers/get-data";
 import { eventsEndpoint, categoriesEndpoint } from "../api-endpoints/wordpress";
 import formatDate from "../helpers/format-date";
@@ -25,9 +25,15 @@ const Dashboard = () => {
 
   // add class for colour to event object and remove irrelivant data from individual events objects
   useEffect(() => {
-    if(!events || !eventsCategories) return
+    if(!eventsCategories) return
+    if(!events) return
+
+    console.log(events, eventsCategories)
     const formattedEvents = events.map((x) => {
-      let indexColor = eventsCategories.findIndex((category) => category.name === x.acf.category[0].name);
+      let indexColor = eventsCategories.findIndex((category) => {
+        if (!x.acf.category) return false
+        return category.name === x.acf.category[0].name
+      });
       return {
         id: x.id, 
         name: x.acf.title,
@@ -36,8 +42,8 @@ const Dashboard = () => {
         time: x.acf.time, 
         image: x.acf.image ? x.acf.image.url : null,
         description: x.acf.description ? x.acf.description : null,
-        eventCategory: x.acf.category[0].name, 
-        color: eventsCategories[indexColor].acf.colour,
+        eventCategory: x.acf.category ? x.acf.category[0].name : 'default', 
+        color: eventsCategories[indexColor] && eventsCategories[indexColor].acf.colour,
         active: false,
       }
     }).sort((a, b) => {
@@ -64,11 +70,11 @@ const Dashboard = () => {
         {(pageData && pageData.acf && pageData.acf.title) && <Box width={['100%', '100%', '100%','calc(25% - 5rem)']} marginRight={['0', '0', '0', '5rem']}>
           <LargeH1Title>{pageData.acf.title}</LargeH1Title>
         </Box>}
-        {(pageData && pageData.acf && pageData.acf.text_1) &&<Box width={['100%', '100%', '100%','calc(37.5% - 5rem)']} marginRight={['0', '0', '0', '5rem']}>
+        {(pageData && pageData.acf && pageData.acf.text_1) &&<Box marginBottom={['2.5rem']} width={['100%', '100%', '100%','calc(37.5% - 5rem)']} marginRight={['0', '0', '0', '5rem']}>
           <PText dangerouslySetInnerHTML={{__html: pageData.acf.text_1}}/>
         </Box>}
-        {(pageData && pageData.acf && pageData.acf.text_2) &&<Box width={['100%', '100%', '100%','calc(37.5% - 5rem)']}>
-          <PText dangerouslySetInnerHTML={{__html: pageData.acf.text_2}}/>
+        {(pageData && pageData.acf && pageData.acf.welcome_image) &&<Box width={['100%', '100%', '100%','calc(37.5% - 5rem)']}>
+          <Image src={ pageData.acf.welcome_image.url} alt="welcome" />
         </Box>}
       </Flex>
       {eventsFormatted && 

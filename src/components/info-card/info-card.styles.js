@@ -23,8 +23,11 @@ const textStyling = (props) => css`
   color: ${props.primary ?  lighten('0.44', `${props.theme.colors.primary}`) : props.theme.colors.darkGrey};
   font-weight: ${props.theme.fontWeights.body};
   line-height: ${props.theme.lineHeights.base};
-  font-size: ${props.theme.fontSizes[2]};
+  font-size: ${props.theme.fontSizes[1]};
   word-break: break-all;
+  @media screen and (max-width: 600px) {
+    font-size: ${props.theme.fontSizes[0]};
+  }
 `
 
 
@@ -35,7 +38,17 @@ const smallTextStyling = (props) => css`
   font-size: ${props.theme.fontSizes[0]};
 `
 
+const imageStyling = (props) => css`
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 100rem;
+  margin-bottom: 1rem;
+`
+
+
 export const Wrapper = styled(Flex)(wrapperStyling);
 export const Title = styled.h4(titleStyling);
 export const Text = styled.span(textStyling);
 export const SmallText = styled.span(smallTextStyling);
+export const Image = styled.img(imageStyling);

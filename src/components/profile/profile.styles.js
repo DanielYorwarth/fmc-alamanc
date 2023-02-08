@@ -30,7 +30,24 @@ const textStyling = (props) => css`
 const imageWrapperStyling = (props) => css`
   position: relative;
   width: 100%;
-  height: 32rem;
+  height: 35vw;
+  max-height: 32rem;
+  @media screen and (max-width: 2000px) {
+    height: 50vw;
+    max-height: auto;
+  }
+  @media screen and (max-width: 1200px) {
+    height: 40vw;
+    max-height: 40rem;
+  }
+  @media screen and (max-width: 762px) {
+    height: 80vw;
+    max-height: none;
+  }
+  @media screen and (max-width: 1024px) {
+    height: 60vw;
+    max-height: none;
+  }
 `
 
 const imageStyling = (props) => css`
@@ -40,7 +57,7 @@ const imageStyling = (props) => css`
   top: 0;
   height: 100%;
   background-size: cover;
-  background-position: center center;
+  background-position: center top;
   background-repeat: no-repeat;
   background-image: url(${props.backgroundImage});
 `

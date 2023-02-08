@@ -1,9 +1,10 @@
 import React from "react";
 import { Flex, Box } from "reflexbox";
-import { Wrapper, Title, Text, SmallText } from "./info-card.styles";
+import { Wrapper, Title, Text, SmallText, Image } from "./info-card.styles";
 
-const InfoCard = ({width, title, textList, phone1, phone2, email, primary}) => <Wrapper marginRight={['0', "2rem"]} marginBottom="2rem" flexDirection="column" primary={primary} justifyContent="center" width={width}>
-   {title && <Title primary={primary}>{title}</Title>}
+const InfoCard = ({width, title, textList, phone1, phone2, email, primary, image}) => <Wrapper marginRight={['0', "2rem"]} marginBottom="2rem" flexDirection="column" primary={primary} justifyContent="center" width={width}>
+  {image && <Image alt={`Image for ${title}`} src={image} />}
+  {title && <Title primary={primary}>{title}</Title>}
   {textList && <Flex marginBottom="1rem" flexWrap="wrap">
     {textList.map((text, i) => <SmallText primary={primary} key={i} dangerouslySetInnerHTML={{__html: i !== textList.length - 1 ? `${text}&nbsp&nbsp•&nbsp&nbsp` : text}}/>)}
   </Flex>}

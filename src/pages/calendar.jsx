@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { EventInfo } from "../components/event-info";
 import { SidepanelRight } from "../components/sidepanel-right";
-import { H1Title } from "../components/styles";
+import { H1Title, PText } from "../components/styles";
 import { EventTimeline } from "../components/event-timeline";
 import { EventCalendar } from "../components/event-calendar";
 import { Box, Flex } from "reflexbox";
@@ -34,7 +34,10 @@ const Calendar = () => {
     console.log(events)
 
     const formattedEvents = events.map((x) => {
-      let indexColor = eventsCategories.findIndex((category) => category.name === x.acf.category[0].name);
+      let indexColor = eventsCategories.findIndex((category) => {
+        if (!x.acf.category) return false
+        return category.name === x.acf.category[0].name
+      });
       return {
         id: x.id, 
         name: x.acf.title,
@@ -43,9 +46,9 @@ const Calendar = () => {
         time: x.acf.time, 
         image: x.acf.image ? x.acf.image.url : null,
         description: x.acf.description ? x.acf.description : null,
-        eventCategory: x.acf.category[0].name, 
-        colorName: eventColors[indexColor],
-        color: eventsCategories[indexColor].acf.colour,
+        eventCategory: x.acf.category && x.acf.category[0].name, 
+        colorName: eventsCategories[indexColor] && eventsCategories[indexColor].acf.colour,
+        color: eventsCategories[indexColor] && eventsCategories[indexColor].acf.colour,
         active: false,
       }
     }).sort((a, b) => {
@@ -84,19 +87,22 @@ const Calendar = () => {
       : 
       <>
       <Box marginBottom="4rem" width={["100%", "100%", "100%", "calc(75% - 14rem)"]}>
-        {eventsFormatted && <H1Title>
-          <Flex alignItems="center">
-            CALENDAR 
-            <Box marginLeft="1.5rem">
-              <InfoPopup width="42rem">
-              Due to the COVID-19 pandemic, all scheduled committee meetings prior to 21 June 2021 are taking place virtually. Please note that during this period of uncertainty, all events are subject to cancellation or postponement. The venue for The Furniture Makers’ Company events is Furniture Makers’ Hall unless shown otherwise. Guests are very welcome to most events.
-              </InfoPopup>
-            </Box>
-          </Flex>
-        </H1Title>}
+        <Flex  flexWrap="wrap" alignItems="center" justifyContent="space-between">
+          {eventsFormatted && <H1Title>
+            <Flex alignItems="center">
+              CALENDAR 
+              <Box marginLeft="1.5rem">
+                <InfoPopup width="42rem">
+                Due to the COVID-19 pandemic, all scheduled committee meetings prior to 21 June 2021 are taking place virtually. Please note that during this period of uncertainty, all events are subject to cancellation or postponement. The venue for The Furniture Makers’ Company events is Furniture Makers’ Hall unless shown otherwise. Guests are very welcome to most events.
+                </InfoPopup>
+              </Box>
+            </Flex>
+          </H1Title>}
+          <Box marginTop="-2rem" onClick={() => setIndvidualEventActive(true)}><PText>View All Events</PText></Box>
+        </Flex>
         {eventsFormatted && <EventCalendar categories={eventsCategories} onClick={(id, type) => onDateClickHandler(id, type)} events={eventsFormatted} colors={eventsCategories && eventsCategories.map((category) => category.acf.colour)} />}
       </Box>
-      <SidepanelRight onOutsideClick={() => setIndvidualEventActive(null)} right={indvidualEventActive ? '0' : '-100%'} width={["80%", "70%", "60%", "25%"]}>
+      <SidepanelRight onOutsideClick={() => setIndvidualEventActive(false)} right={indvidualEventActive ? '0' : '-100%'} width={["80%", "70%", "60%", "25%"]}>
         {indvidualEvent ? 
         <>
           <EventInfo 
