@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from '@emotion/react'
 import theme from './theme'
 import { Global } from "@emotion/react";
@@ -15,9 +15,11 @@ import {
 } from "./pages";
 import { MobileHeader } from './components/mobile-header';
 import MemberInfo from './pages/member-info';
+import useScript from './hooks/useScript';
 
 
 const App = () => {
+  useScript("https://cdn.jsdelivr.net/gh/nwcell/ics.js@0.2.0/ics.deps.min.js")
 
   const [isMenuActive, setIsMenuActive] = useState(false)
 

@@ -158,7 +158,7 @@ const wrapperStyling = (props) => css`
 const mapColours = (props) => {
   let styles = ""
   props.colors.forEach((color, i) => {
-    styles += `.highlighted${i} {
+    styles += `.${color.replace(/^#/, "")} {
       position: relative;
       &:before {
         transition: 0.3s;

@@ -35,7 +35,7 @@ const Committees = () => {
       </H1Title>}
       {(committees && committees.acf && committees.acf.areas) && committees.acf.areas.map(({title, member}) => <Accordian key={title} title={title}>
         {member && <Flex flexWrap="wrap">
-          {member.map(({acf: {image, name, phone_1, phone_2, email, roles}}, i) => <InfoCard key={name}
+          {member.map(({acf: {image, name, phone_1, phone_2, email, roles, events}}, i) => <InfoCard key={name}
             primary={false}
             width={['100%', '100%', '100%', 'calc(50% - 2rem)']}
             image={image ? image.url : null}
@@ -43,6 +43,7 @@ const Committees = () => {
             phone1={phone_1}
             phone2={phone_2}
             email={email}
+            events={events}
             textList={roles && roles.map(role => role.role)}
           />)}
         </Flex>}

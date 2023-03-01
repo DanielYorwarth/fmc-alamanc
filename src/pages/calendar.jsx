@@ -31,7 +31,6 @@ const Calendar = () => {
   // add class for colour to event object and remove irrelivant data from individual events objects
   useEffect(() => {
     if(!events || !eventsCategories || !eventColors) return
-    console.log(events)
 
     const formattedEvents = events.map((x) => {
       let indexColor = eventsCategories.findIndex((category) => {
@@ -52,7 +51,7 @@ const Calendar = () => {
         active: false,
       }
     }).sort((a, b) => {
-      return new Date(a.start) - new Date(b.start);
+      return new Date(`${a.start}:${a.time}`) - new Date(`${b.start}:${b.time}`);
     });
     setEventsFormatted(formattedEvents)
   }, [events, eventsCategories, eventColors])

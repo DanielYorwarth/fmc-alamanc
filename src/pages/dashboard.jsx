@@ -28,7 +28,6 @@ const Dashboard = () => {
     if(!eventsCategories) return
     if(!events) return
 
-    console.log(events, eventsCategories)
     const formattedEvents = events.map((x) => {
       let indexColor = eventsCategories.findIndex((category) => {
         if (!x.acf.category) return false
@@ -47,7 +46,7 @@ const Dashboard = () => {
         active: false,
       }
     }).sort((a, b) => {
-      return new Date(a.start) - new Date(b.start);
+      return new Date(`${a.start}:${a.time}`) - new Date(`${b.start}:${b.time}`);
     }).filter(event => {
       const parts = event.start.split(/[- :]/);
       var month = parts[1];
@@ -55,7 +54,7 @@ const Dashboard = () => {
       var currentdate = new Date();
       var cur_month = currentdate.getMonth() + 1;
       var cur_year = currentdate.getFullYear();
-      return  cur_month == month && year == cur_year
+      return  cur_month == month && year == cur_year && currentdate.getTime() <= new Date(event.start).getTime()
     })
     setEventsFormatted(formattedEvents)
   }, [events, eventsCategories])
@@ -75,12 +74,14 @@ const Dashboard = () => {
         </Box>}
         {(pageData && pageData.acf && pageData.acf.welcome_image) &&<Box width={['100%', '100%', '100%','calc(37.5% - 5rem)']}>
           <Image src={ pageData.acf.welcome_image.url} alt="welcome" />
+          <b><PText dangerouslySetInnerHTML={{__html: pageData.acf.welcome_image.title}}/></b>
+
         </Box>}
       </Flex>
-      {eventsFormatted && 
+      {eventsFormatted && eventsFormatted.length && 
       <Box>
         <Flex flexWrap="wrap" justifyContent="space-between">
-          <H1Title>THIS MONTHS EVENTS</H1Title>
+          <H1Title>THIS MONTH'S EVENTS</H1Title>
           <Link to="/calendar">
             <Flex marginBottom={["2rem"]} alignItems="center">
               <Box marginRight="1rem">View all events</Box>

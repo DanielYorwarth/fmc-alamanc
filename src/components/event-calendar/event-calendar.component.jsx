@@ -13,7 +13,7 @@ const EventCalendar = ({theme, events, colors, onClick, categories}) => {
     const dateobj = events && getThisDate(events, date)
     if (dateobj.length === 0) return
     if (dateobj.length === 1 ) {
-      return dateobj[0] ? `${dateobj[0].colorName} ${dateobj[0].active ? 'active' : ''}` : "";
+      return dateobj[0] ? `${dateobj[0].colorName?.replace(/^#/, "")} ${dateobj[0].active ? 'active' : ''}` : "";
     } else {
       return  `gradient-color ${dateobj.find(date => date.active === true) ? 'active' : ''}`;
     }
@@ -21,7 +21,7 @@ const EventCalendar = ({theme, events, colors, onClick, categories}) => {
   };
 
   const setEventIDs = (date, view) => {
-    const thisDatesObj = events && getThisDate(events, date);
+    let thisDatesObj = events && getThisDate(events, date);
     if (thisDatesObj.length === 0) return
     if (thisDatesObj.length === 1 ) {
       return <Hidden className="event-id" data-type="event-id" id={thisDatesObj[0] && thisDatesObj[0].id}/>;
