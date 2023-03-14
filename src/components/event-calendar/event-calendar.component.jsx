@@ -6,8 +6,9 @@ import { Wrapper, Hidden, Circle, Absolute } from './event-calendar.styles';
 import { getThisDate } from './helpers';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { Text } from '../event-info/event-info.styles';
 
-const EventCalendar = ({theme, events, colors, onClick, categories}) => {
+const EventCalendar = ({theme, events, colors, onClick, categories, categoryClick}) => {
 
   const setEvents = (date) => {
     const dateobj = events && getThisDate(events, date)
@@ -62,8 +63,12 @@ const EventCalendar = ({theme, events, colors, onClick, categories}) => {
         tileClassName={({ activeStartDate, date }) => setEvents(date)}
         tileContent={({ activeStartDate, date, view }) => setEventIDs(date,view)}
       />
+      <Flex alignItems="center" justifyContent="space-between" padding={["0", "0", "0rem 3rem"]}>
+        <Text>Filter by category</Text>
+        <Text onClick={() => categoryClick('all')} style={{cursor: 'pointer'}} ><b style={{fontWeight: 'bold'}}>Reset</b></Text>
+      </Flex>
       {categories && <Flex flexWrap="wrap" padding={["0", "0", "1rem 3rem"]}>
-        {categories &&  categories.map((category) => <Flex width={["100%", "calc(50% - 1rem)",  "calc(50% - 1rem)", "calc(33.33% - 1rem)"]} marginBottom="1rem" marginRight="1rem" key={category.name}>
+        {categories &&  categories.map((category) => <Flex style={{cursor: 'pointer'}} onClick={() => categoryClick(category.name)} width={["100%", "calc(50% - 1rem)",  "calc(50% - 1rem)", "calc(33.33% - 1rem)"]} marginBottom="1rem" marginRight="1rem" key={category.name}>
           <Circle colour={category.acf.colour}></Circle>{category.name}
         </Flex>)}
       </Flex>}

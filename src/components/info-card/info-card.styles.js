@@ -69,6 +69,7 @@ const circleStyle = (props) => css`
   display:block;
   margin-top: 0.2rem;
   margin-right: 0.5rem;
+  flex-shrink: 0;
 `
 
 const eventsWrapperStyling = (props) => css`

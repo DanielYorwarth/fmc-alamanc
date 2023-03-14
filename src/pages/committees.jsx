@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Box } from "reflexbox";
 import Accordian from "../components/accordian/accordian.component";
 import { InfoCard } from "../components/info-card";
@@ -16,8 +16,7 @@ const Committees = () => {
   useEffectOnce(() => {
     getData(null, 359, setCommittees).catch(console.error)
   }, [])
-
-  console.log(committees)
+console.log(committees)
   return (
     <>
       {!committees ?
@@ -33,7 +32,7 @@ const Committees = () => {
           </Box>
         </Flex>
       </H1Title>}
-      {(committees && committees.acf && committees.acf.areas) && committees.acf.areas.map(({title, member}) => <Accordian key={title} title={title}>
+      {(committees && committees.acf && committees.acf.areas) && committees.acf.areas.map(({title, member, events}) => <Accordian events={events} key={title} title={title}>
         {member && <Flex flexWrap="wrap">
           {member.map(({acf: {image, name, phone_1, phone_2, email, roles, events}}, i) => <InfoCard key={name}
             primary={false}

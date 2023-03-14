@@ -17,6 +17,9 @@ const Calendar = () => {
   // set states for 
   const [events, setEvents] = useState(null)
   const [eventsFormatted, setEventsFormatted] = useState(null)
+  const [allFormattedEvents, setAllEventsFormatted] = useState(null)
+
+  const [filter, setFilter] = useState(null)
   const [eventsCategories, setEventsCategories] = useState(null)
   const [eventColors, setEventColors] = useState(null)
   const [indvidualEvent, setIndvidualEvent] = useState(null)
@@ -27,6 +30,12 @@ const Calendar = () => {
     getData(eventsEndpoint, null, setEvents).catch(console.error)
     getData(categoriesEndpoint, null, setEventsCategories).catch(console.error)
   }, [])
+
+  useEffect(() => {
+    if(!allFormattedEvents || !filter) return
+    setEventsFormatted(allFormattedEvents.filter(({eventCategory}) => eventCategory === filter))
+    setIndvidualEventActive(true)
+  }, [filter, allFormattedEvents])
 
   // add class for colour to event object and remove irrelivant data from individual events objects
   useEffect(() => {
@@ -54,6 +63,7 @@ const Calendar = () => {
       return new Date(`${a.start}:${a.time}`) - new Date(`${b.start}:${b.time}`);
     });
     setEventsFormatted(formattedEvents)
+    setAllEventsFormatted(formattedEvents)
   }, [events, eventsCategories, eventColors])
 
   // Set class list for colours
@@ -65,20 +75,31 @@ const Calendar = () => {
   const onDateClickHandler = (id) => {
     if(!id || id === '' ) return
     setIndvidualEvent(eventsFormatted.find(event => event.id == id))
-    setEventsFormatted(eventsFormatted.map(event => {
+    setEventsFormatted(prev => prev.map(event => {
       return {...event, active: event.id == id ? true : false}
     }))
     setIndvidualEventActive(true)
   }
 
-  const onBackClickHandler = (id) => {
+  const onCategoryClickHandler = (category) => {
+    if(!category) return 
+    if(category === 'all') {
+      setFilter(null)
+      setEventsFormatted(allFormattedEvents)
+      setIndvidualEvent(null)
+      setIndvidualEventActive(true)
+      return
+    }  
+    setFilter(category)
+  }
+
+  const onBackClickHandler = () => {
     setIndvidualEvent(null)
-    setEventsFormatted(eventsFormatted.map(event => {
+    setEventsFormatted(prev => prev.map(event => {
       return {...event, active: false}
     }))
     setIndvidualEventActive(false)
   }
-
   return (
     <>
       {!eventsFormatted ?
@@ -99,7 +120,7 @@ const Calendar = () => {
           </H1Title>}
           <Box marginTop="-2rem" onClick={() => setIndvidualEventActive(true)}><PText>View All Events</PText></Box>
         </Flex>
-        {eventsFormatted && <EventCalendar categories={eventsCategories} onClick={(id, type) => onDateClickHandler(id, type)} events={eventsFormatted} colors={eventsCategories && eventsCategories.map((category) => category.acf.colour)} />}
+        {eventsFormatted && <EventCalendar categoryClick={onCategoryClickHandler} categories={eventsCategories} onClick={(id, type) => onDateClickHandler(id, type)} events={eventsFormatted} colors={eventsCategories && eventsCategories.map((category) => category.acf.colour)} />}
       </Box>
       <SidepanelRight onOutsideClick={() => setIndvidualEventActive(false)} right={indvidualEventActive ? '0' : '-100%'} width={["80%", "70%", "60%", "25%"]}>
         {indvidualEvent ? 
@@ -119,8 +140,10 @@ const Calendar = () => {
         eventsFormatted && 
           <EventTimeline
             title="All Events"
+            onClick={onDateClickHandler}
             events={eventsFormatted.filter(event => new Date(event.start) >= new Date()).map(event => {
               return {
+                id: event.id,
                 title: event.name,
                 date: formatDate(event.start),
                 time: event.time,

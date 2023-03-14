@@ -32,8 +32,8 @@ const InfoCard = ({width, title, textList, phone1, phone2, email, primary, image
   const onDownloadClick = () => {
     if (!calendar) return
     calendar.download(`${title} FMC Events`);
-
   }
+  
   return (
     <Wrapper  onClick={() => show && setShow(false)} marginRight={['0', "2rem"]} marginBottom="2rem" flexDirection="column" primary={primary} justifyContent="center" width={width}>
       {image && <Image alt={`Image for ${title}`} src={image} />}

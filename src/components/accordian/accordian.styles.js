@@ -24,7 +24,6 @@ const accordianStyling = (props) => css`
 
 const panelStyling = (props) => css`
   display: ${props.active ? "block" : "none"};
-  overflow: hidden;
   width: 100%;
   padding: ${props.theme.spacing[2]};
   background-color: ${props.theme.colors.light};
