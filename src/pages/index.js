@@ -3,4 +3,4 @@ export { default as Calendar } from "./calendar";
 export { default as Contact } from "./contact";
 export { default as Committees } from "./committees";
 export { default as CorporateMembership } from "./corporate-membership";
-export { default as OfficersAndTheCourt } from "./officers-and-the-court";
+export { default as TheCourt } from "./the-court";

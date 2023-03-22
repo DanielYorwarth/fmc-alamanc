@@ -100,6 +100,11 @@ const Calendar = () => {
     }))
     setIndvidualEventActive(false)
   }
+  const today = new Date();
+  var yesterday = new Date(today);
+  yesterday.setDate(today.getDate()-1);
+  yesterday.toLocaleDateString();
+
   return (
     <>
       {!eventsFormatted ?
@@ -113,7 +118,7 @@ const Calendar = () => {
               CALENDAR 
               <Box marginLeft="1.5rem">
                 <InfoPopup width="42rem">
-                Due to the COVID-19 pandemic, all scheduled committee meetings prior to 21 June 2021 are taking place virtually. Please note that during this period of uncertainty, all events are subject to cancellation or postponement. The venue for The Furniture Makers’ Company events is Furniture Makers’ Hall unless shown otherwise. Guests are very welcome to most events.
+                The venue for The Furniture Makers’ Company committee meetings is Furniture Makers’ Hall bar regional committees or unless otherwise shown. Guests are very welcome to most social events.
                 </InfoPopup>
               </Box>
             </Flex>
@@ -141,7 +146,7 @@ const Calendar = () => {
           <EventTimeline
             title="All Events"
             onClick={onDateClickHandler}
-            events={eventsFormatted.filter(event => new Date(event.start) >= new Date()).map(event => {
+            events={eventsFormatted.filter(event => new Date(event.start) >= yesterday).map(event => {
               return {
                 id: event.id,
                 title: event.name,

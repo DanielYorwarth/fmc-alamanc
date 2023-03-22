@@ -16,7 +16,7 @@ const Committees = () => {
   useEffectOnce(() => {
     getData(null, 359, setCommittees).catch(console.error)
   }, [])
-console.log(committees)
+
   return (
     <>
       {!committees ?

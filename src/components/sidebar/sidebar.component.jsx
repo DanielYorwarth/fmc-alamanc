@@ -33,7 +33,6 @@ const Sidebar = ({theme, left, onOutsideClick, onMenuClick}) => {
             <Flex flexDirection="column" alignItems="center">
               <Logo src={img} alt="FMC Logo" />
               <Title>ALMANAC</Title>
-              <Text>2022 - 2023</Text>
             </Flex>
           </NavLink>
         </Box>
@@ -72,11 +71,11 @@ const Sidebar = ({theme, left, onOutsideClick, onMenuClick}) => {
               </NavItem>
             </li>
             <li>
-              <NavItem onClick={onMenuClick && onMenuClick} to="/officers-and-the-court">
+              <NavItem onClick={onMenuClick && onMenuClick} to="/the-court">
                 <Box marginTop="0.1rem" marginRight={theme.spacing[0]}>
                   {officersIcon}
                 </Box>
-                <HiddenSmall>Officers & The Court</HiddenSmall>
+                <HiddenSmall>The Court</HiddenSmall>
               </NavItem>
             </li>
             <li>

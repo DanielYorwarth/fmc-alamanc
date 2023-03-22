@@ -10,7 +10,7 @@ import {
   Committees,
   Contact,
   Calendar,
-  OfficersAndTheCourt,
+  TheCourt,
   CorporateMembership
 } from "./pages";
 import { MobileHeader } from './components/mobile-header';
@@ -34,11 +34,10 @@ const App = () => {
             <Route path="/" element={<Dashboard />} />
             <Route exact path="/calendar" element={<Calendar />} />
             <Route exact path="/committees" element={<Committees />} />
-            <Route exact path="/officers-and-the-court" element={<OfficersAndTheCourt />} />
+            <Route exact path="/the-court" element={<TheCourt />} />
             <Route exact path="/corporate-membership" element={<CorporateMembership />} />
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/member" element={<MemberInfo />} />
-
           </Routes>
         </Container>
       </Router>

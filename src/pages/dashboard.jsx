@@ -51,13 +51,18 @@ const Dashboard = () => {
       const parts = event.start.split(/[- :]/);
       var month = parts[1];
       var year = parts[0];
-      var currentdate = new Date();
+      var currentdate = yesterday;
       var cur_month = currentdate.getMonth() + 1;
       var cur_year = currentdate.getFullYear();
       return  cur_month == month && year == cur_year && currentdate.getTime() <= new Date(event.start).getTime()
     })
     setEventsFormatted(formattedEvents)
   }, [events, eventsCategories])
+
+  const today = new Date();
+  var yesterday = new Date(today);
+  yesterday.setDate(today.getDate()-1);
+  yesterday.toLocaleDateString();
 
   return (
     <>
