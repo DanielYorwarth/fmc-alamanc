@@ -1,5 +1,5 @@
 import { withTheme } from '@emotion/react';
-import React from 'react'
+import React, { useState } from 'react'
 import Calendar from "react-calendar";
 import { Flex } from 'reflexbox';
 import { Wrapper, Hidden, Circle, Absolute } from './event-calendar.styles';
@@ -10,11 +10,13 @@ import { Text } from '../event-info/event-info.styles';
 
 const EventCalendar = ({theme, events, colors, onClick, categories, categoryClick}) => {
 
+  const [currentDay, setCurrentDay] = useState(new Date())
+
   const setEvents = (date) => {
     const dateobj = events && getThisDate(events, date)
     if (dateobj.length === 0) return
     if (dateobj.length === 1 ) {
-      return dateobj[0] ? `${dateobj[0].colorName?.replace(/^#/, "")} ${dateobj[0].active ? 'active' : ''}` : "";
+      return dateobj[0] ? `C${dateobj[0].colorName?.replace(/^#/, "")} ${dateobj[0].active ? 'active' : ''}` : "";
     } else {
       return  `gradient-color ${dateobj.find(date => date.active === true) ? 'active' : ''}`;
     }
@@ -59,6 +61,7 @@ const EventCalendar = ({theme, events, colors, onClick, categories, categoryClic
             <path id="Polygon_1" data-name="Polygon 1" d="M5,0l5,9H0Z" transform="translate(9) rotate(90)" fill="#8e8e8e"/>
           </svg>
         }
+        defaultValue={currentDay}
         onClickDay={(value, event) => onClick(event.target.nextSibling.id)}
         tileClassName={({ activeStartDate, date }) => setEvents(date)}
         tileContent={({ activeStartDate, date, view }) => setEventIDs(date,view)}
