@@ -11,6 +11,7 @@ import { InfoPopup } from "../components/info-popup";
 import formatDate from "../helpers/format-date";
 import { Loading } from "../components/loading";
 import { useEffectOnce } from "../hooks/use-effect-once";
+import moment from 'moment'
 
 const Calendar = () => {
 
@@ -60,7 +61,7 @@ const Calendar = () => {
         active: false,
       }
     }).sort((a, b) => {
-      return new Date(`${a.start}:${a.time}`) - new Date(`${b.start}:${b.time}`);
+      return moment(`${a.start}:${a.time}`) - moment(`${b.start}:${b.time}`);
     });
     setEventsFormatted(formattedEvents)
     setAllEventsFormatted(formattedEvents)
@@ -146,7 +147,7 @@ const Calendar = () => {
           <EventTimeline
             title="All Events"
             onClick={onDateClickHandler}
-            events={eventsFormatted.filter(event => new Date(event.start) >= yesterday).map(event => {
+            events={eventsFormatted.filter(event => moment(event.start) >= yesterday).map(event => {
               return {
                 id: event.id,
                 title: event.name,

@@ -13,7 +13,7 @@ const InfoCard = ({width, title, textList, phone1, phone2, email, primary, image
   useEffect(() => {
     if (!events) return
     setFilteredEvents(events.sort((a, b) => {
-      return new Date(`${a.acf.date_from}:${a.acf.time}`) - new Date(`${b.acf.date_from}:${b.acf.time}`);
+      return new Date(`${a.acf.date_from}:${a.acf.time}`) - new Date(`${b.acf.date_from}:${b.acf.time_end ? b.acf.time_end : '00:00'}`);
     }).filter(event => {
       var currentdate = new Date();
       return currentdate.getTime() <= new Date(event.acf.date_from).getTime()
@@ -24,7 +24,7 @@ const InfoCard = ({width, title, textList, phone1, phone2, email, primary, image
     if(!filteredEvents) return
     const calendarInstace = window.ics();
     filteredEvents.forEach(event => {
-      calendarInstace.addEvent(event.acf.title, event.acf.description, "", event.acf.date_from, event.acf.date_to);
+      calendarInstace.addEvent(event.acf.title, event.acf.description, "", `${event.acf.date_from} ${event.acf.time ? event.acf.time : '00:00'}`, `${event.acf.date_to ? event.acf.date_to : event.acf.date_from} ${event.acf.time_end ? event.acf.time_end : '00:00'}`);
     });
     setCalendar(calendarInstace)
   }, [filteredEvents])
