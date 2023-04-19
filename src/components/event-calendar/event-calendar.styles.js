@@ -158,8 +158,6 @@ const wrapperStyling = (props) => css`
 const mapColours = (props) => {
   let styles = ""
   props.colors.forEach((color, i) => {
-    console.log(color[5].replace(/^#/, "")
-    )
     styles += `.C${color.replace(/^#/, "")} {
       position: relative;
       &:before {

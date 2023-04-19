@@ -53,6 +53,7 @@ const Calendar = () => {
         start: x.acf.date_from, 
         end: x.acf.date_to, 
         time: x.acf.time, 
+        endTime: x.acf.time_end, 
         image: x.acf.image ? x.acf.image.url : null,
         description: x.acf.description ? x.acf.description : null,
         eventCategory: x.acf.category && x.acf.category[0].name, 
@@ -61,7 +62,7 @@ const Calendar = () => {
         active: false,
       }
     }).sort((a, b) => {
-      return moment(`${a.start}:${a.time}`) - moment(`${b.start}:${b.time}`);
+      return moment(`${a.start}${a.time ? ` ${a.time}` : ' 00:00'}`, 'YYYY-MM-DD HH:mm A') - moment(`${b.start}${b.endTime ? ` ${b.endTime}` : ' 00:00'}`, 'YYYY-MM-DD HH:mm A');
     });
     setEventsFormatted(formattedEvents)
     setAllEventsFormatted(formattedEvents)
@@ -101,8 +102,7 @@ const Calendar = () => {
     }))
     setIndvidualEventActive(false)
   }
-  var today = moment();
-
+  var today = moment()
   return (
     <>
       {!eventsFormatted ?
