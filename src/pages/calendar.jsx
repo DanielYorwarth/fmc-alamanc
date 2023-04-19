@@ -101,10 +101,7 @@ const Calendar = () => {
     }))
     setIndvidualEventActive(false)
   }
-  const today = new Date();
-  var yesterday = new Date(today);
-  yesterday.setDate(today.getDate()-1);
-  yesterday.toLocaleDateString();
+  var today = moment();
 
   return (
     <>
@@ -147,7 +144,7 @@ const Calendar = () => {
           <EventTimeline
             title="All Events"
             onClick={onDateClickHandler}
-            events={eventsFormatted.filter(event => moment(event.start) >= yesterday).map(event => {
+            events={eventsFormatted.filter(event => moment(event.start).diff(today, 'days') >= 0).map(event => {
               return {
                 id: event.id,
                 title: event.name,
