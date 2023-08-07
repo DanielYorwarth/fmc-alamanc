@@ -30,6 +30,14 @@ const titleStyling = (props) => css`
     font-size: ${props.theme.fontSizes[4]};
   }
 `
+export const DescriptionLink = styled.span`
+  a {
+    color: rgb(226, 55, 52);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
+
 
 const textStyling = (props) => css`
   color: ${props.theme.colors.dark};

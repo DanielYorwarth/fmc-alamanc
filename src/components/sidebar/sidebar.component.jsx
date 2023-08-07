@@ -79,6 +79,14 @@ const Sidebar = ({theme, left, onOutsideClick, onMenuClick}) => {
               </NavItem>
             </li>
             <li>
+              <NavItem onClick={onMenuClick && onMenuClick} to="/charity-roles">
+                <Box marginTop="0.1rem" marginRight={theme.spacing[0]}>
+                  {committeesIcon}
+                </Box>
+                <HiddenSmall>Livery and charity roles</HiddenSmall>
+              </NavItem>
+            </li>
+            <li>
               <NavItem onClick={onMenuClick && onMenuClick} to="/contact">
                 <Box marginTop="0.1rem" marginRight={theme.spacing[0]}>
                   {contactIcon}

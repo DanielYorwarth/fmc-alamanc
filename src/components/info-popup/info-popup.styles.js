@@ -13,6 +13,9 @@ const wapperStyling = (props) => css`
       visibility: visible;
     }
   }
+  @media screen and (max-width: 639px) {
+    display: none;
+  }
 `
 
 const hoverTextStyling = (props) => css`

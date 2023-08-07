@@ -5,6 +5,7 @@ import { Global } from "@emotion/react";
 import { GlobalStyles } from './App.styles.js';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Sidebar, Container } from './components';
+import CharityRoles from './pages/charity-roles';
 import {
   Dashboard,
   Committees,
@@ -37,6 +38,7 @@ const App = () => {
             <Route exact path="/the-court" element={<TheCourt />} />
             <Route exact path="/corporate-membership" element={<CorporateMembership />} />
             <Route exact path="/contact" element={<Contact />} />
+            <Route exact path="/charity-roles" element={<CharityRoles />} />
             <Route exact path="/member" element={<MemberInfo />} />
           </Routes>
         </Container>
