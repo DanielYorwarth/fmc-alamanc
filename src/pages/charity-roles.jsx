@@ -22,9 +22,12 @@ const Charity = () => {
     :
    <Box maxWidth="100rem">
       {(charity && charity.acf) && <Box marginBottom="8rem">
+        <H1Title>
+          Livery and Charity Roles
+        </H1Title>
         <PText>
           {charity.acf.description}
-        </PText>
+        </PText> 
       </Box>}
       <a target="_blank" rel="noreferrer" href="https://www.furnituremakers.org.uk"><PText>furnituremakers.org.uk</PText></a>
       {(charity && charity.acf) && charity.acf.contact_office.map(({office, phone, contacts}, i) => <Box width="100%" marginBottom="5rem">
