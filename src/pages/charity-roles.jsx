@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Flex } from "reflexbox";
-import { H1Title, PText, LightText } from "../components/styles";
+import { H1Title, PText, LightText, Title } from "../components/styles";
 import getData from "../helpers/get-data";
 import { InfoCard } from "../components/info-card";
 import { Loading } from "../components/loading";
@@ -23,7 +23,7 @@ const Charity = () => {
    <Box maxWidth="100rem">
       {(charity && charity.acf) && <Box marginBottom="8rem">
         <H1Title>
-          Livery and Charity Roles
+          LIVERY AND CHARITY ROLES        
         </H1Title>
         <PText>
           {charity.acf.description}
