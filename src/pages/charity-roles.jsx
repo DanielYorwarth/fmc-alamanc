@@ -32,7 +32,7 @@ const Charity = () => {
       
       {(charity && charity.acf) && charity.acf.contact_office.map(({office, phone, contacts}, i) => <Box width="100%" marginBottom="5rem">
         <Flex alignItems="center" flexWrap="wrap" marginBottom="2rem">
-          {office && <Box marginRight="2rem"><H1Title>{office}</H1Title></Box>}
+          {office && <Box marginRight="2rem"><Title>{office}</Title></Box>}
           {phone && <LightText>{phone}</LightText>}
         </Flex>
         {contacts && <Flex width="100%" flexWrap="wrap">
